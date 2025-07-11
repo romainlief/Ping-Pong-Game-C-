@@ -5,17 +5,17 @@
 #include <thread>
 #include <random>
 
-// Constantes
-const float paddleWidth = 25.f, paddleHeight = 100.f;
-const float paddleSpeed = 405.f;
-const float ballRadius = 10.f;
+#include "const.cpp"
+
+using namespace std;;
+
 float ballSpeed;
 
 // Fonction pour générer un nombre aléatoire dans une plage donnée
 float randomFloat(float min, float max) {
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(min, max);
+    static random_device rd;
+    static mt19937 gen(rd());
+    uniform_real_distribution<> dis(min, max);
     return dis(gen);
 }
 
@@ -36,14 +36,14 @@ void choix_difficulte() {
     bool choixValide = false;
     while (!choixValide) {
         try {
-            std::cout << "Choisissez la difficulté : " << std::endl;
-            std::cout << "1. Facile" << std::endl;
-            std::cout << "2. Moyen" << std::endl;
-            std::cout << "3. Difficile" << std::endl;
-            std::cin >> choix;
+            cout << "Choisissez la difficulté : " << endl;
+            cout << "1. Facile" << endl;
+            cout << "2. Moyen" << endl;
+            cout << "3. Difficile" << endl;
+            cin >> choix;
 
-            if (std::cin.fail()) {
-                throw std::invalid_argument("Entrée invalide");
+            if (cin.fail()) {
+                throw invalid_argument("Entrée invalide");
             }
             if (choix == 1) {
                 ballSpeed = 200.f;
@@ -55,12 +55,12 @@ void choix_difficulte() {
                 ballSpeed = 400.f;
                 choixValide = true;
             } else {
-                throw std::invalid_argument("Choix invalide");
+                throw invalid_argument("Choix invalide");
             }
-        } catch (const std::invalid_argument &e) {
-            std::cin.clear(); // clear the error flag
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << e.what() << ", veuillez réessayer." << std::endl;
+        } catch (const invalid_argument &e) {
+            cin.clear(); // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << e.what() << ", veuillez réessayer." << endl;
         }
     }
 }
@@ -96,13 +96,13 @@ void afficher_compte_a_rebours(sf::RenderWindow &window, sf::Font &font, sf::Spr
     countdownText.setPosition(570.f, 350.f);
 
     for (int i = 3; i > 0; --i) {
-        countdownText.setString(std::to_string(i));
+        countdownText.setString(to_string(i));
         window.clear(sf::Color::Black);
         dessiner_les_elements(window, leftPaddle, rightPaddle, nullptr, scoreText, quitButton
                               , quitButtonText);
         window.draw(countdownText);
         window.display();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        this_thread::sleep_for(chrono::seconds(1));
     }
 }
 
@@ -136,15 +136,15 @@ int main() {
     int leftScore = 0;
     int rightScore = 0;
     sf::Font font;
-    if (!font.loadFromFile("/Users/romainliefferinckx/CLionProjects/test2/BungeeTint-Regular.ttf")) {
-        std::cerr << "Erreur de chargement de la police" << std::endl;
+    if (!font.loadFromFile("BungeeTint-Regular.ttf")) {
+        cerr << "Erreur de chargement de la police" << endl;
         return -1;
     }
 
     sf::Text scoreText;
     scoreText.setFont(font);
     scoreText.setCharacterSize(24);
-    scoreText.setString(std::to_string(leftScore) + " - " + std::to_string(rightScore));
+    scoreText.setString(to_string(leftScore) + " - " + to_string(rightScore));
     scoreText.setPosition(570.f, 20.f);
 
     // Créer le bouton Quitter
@@ -228,10 +228,10 @@ int main() {
 
         // Collision avec les raquettes
         if (ball.getGlobalBounds().intersects(leftPaddle.getGlobalBounds())) {
-            ballVelocity.x = std::abs(ballVelocity.x);
+            ballVelocity.x = abs(ballVelocity.x);
         }
         if (ball.getGlobalBounds().intersects(rightPaddle.getGlobalBounds())) {
-            ballVelocity.x = -std::abs(ballVelocity.x);
+            ballVelocity.x = -abs(ballVelocity.x);
         }
 
         // Gestion des scores et remise à zéro de la balle
@@ -244,7 +244,7 @@ int main() {
         }
 
         // Affichage du score
-        scoreText.setString(std::to_string(leftScore) + " - " + std::to_string(rightScore));
+        scoreText.setString(to_string(leftScore) + " - " + to_string(rightScore));
         if (leftScore > rightScore) {
             scoreText.setFillColor(sf::Color::Green);
         } else if (leftScore < rightScore) {
