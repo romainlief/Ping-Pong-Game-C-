@@ -31,7 +31,7 @@ void resetBall(sf::Sprite &ball, sf::Vector2f &ballVelocity) {
     ballVelocity = {directionX, directionY};
 }
 
-void choix_difficulte() {
+void difChoice() {
     int choix;
     bool choixValide = false;
     while (!choixValide) {
@@ -65,7 +65,7 @@ void choix_difficulte() {
     }
 }
 
-void dessiner_les_elements(sf::RenderWindow &window, sf::Sprite &leftPaddle, sf::Sprite &rightPaddle, sf::Sprite *ball,
+void drawElem(sf::RenderWindow &window, sf::Sprite &leftPaddle, sf::Sprite &rightPaddle, sf::Sprite *ball,
                            sf::Text &scoreText, sf::RectangleShape &quitButton, sf::Text &quitButtonText) {
     window.draw(leftPaddle);
     window.draw(rightPaddle);
@@ -86,7 +86,7 @@ sf::Texture createSolidTexture(sf::Color color, float width, float height) {
     return texture;
 }
 
-void afficher_compte_a_rebours(sf::RenderWindow &window, sf::Font &font, sf::Sprite &leftPaddle,
+void displayCountdown(sf::RenderWindow &window, sf::Font &font, sf::Sprite &leftPaddle,
                                sf::Sprite &rightPaddle, sf::Text &scoreText, sf::RectangleShape &quitButton,
                                sf::Text &quitButtonText) {
     sf::Text countdownText;
@@ -98,7 +98,7 @@ void afficher_compte_a_rebours(sf::RenderWindow &window, sf::Font &font, sf::Spr
     for (int i = 3; i > 0; --i) {
         countdownText.setString(to_string(i));
         window.clear(sf::Color::Black);
-        dessiner_les_elements(window, leftPaddle, rightPaddle, nullptr, scoreText, quitButton
+        drawElem(window, leftPaddle, rightPaddle, nullptr, scoreText, quitButton
                               , quitButtonText);
         window.draw(countdownText);
         window.display();
@@ -107,17 +107,17 @@ void afficher_compte_a_rebours(sf::RenderWindow &window, sf::Font &font, sf::Spr
 }
 
 int main() {
-    choix_difficulte();
-    // Créer une fenêtre SFML
+    difChoice();
+
     sf::RenderWindow window(sf::VideoMode(SCREENWIDTH, SCREENHEIGHT), "Ping Pong Game");
     window.setFramerateLimit(60);
 
 
     // Créer des textures simples avec des couleurs différentes pour les paddles
-    sf::Texture leftPaddleTexture = createSolidTexture(sf::Color::Green, paddleWidth, paddleHeight);
-    sf::Texture rightPaddleTexture = createSolidTexture(sf::Color::Magenta, paddleWidth
+    sf::Texture leftPaddleTexture = createSolidTexture(firstPaddleColor, paddleWidth, paddleHeight);
+    sf::Texture rightPaddleTexture = createSolidTexture(secondPaddleColor, paddleWidth
                                                         , paddleHeight);
-    sf::Texture ballTexture = createSolidTexture(sf::Color::Red, ballRadius * 2, ballRadius * 2);
+    sf::Texture ballTexture = createSolidTexture(ballColor, ballRadius * 2, ballRadius * 2);
 
     // Créer les sprites
     sf::Sprite leftPaddle(leftPaddleTexture);
@@ -176,19 +176,19 @@ int main() {
         }
 
         window.clear(sf::Color::Black);
-        dessiner_les_elements(window, leftPaddle, rightPaddle, &ball, scoreText, quitButton
+        drawElem(window, leftPaddle, rightPaddle, &ball, scoreText, quitButton
                               , quitButtonText);
         window.display();
 
         // Afficher le compte à rebours
-        afficher_compte_a_rebours(window, font, leftPaddle, rightPaddle, scoreText, quitButton
+        displayCountdown(window, font, leftPaddle, rightPaddle, scoreText, quitButton
                                   , quitButtonText);
         break;
     }
 
     // Boucle principale du jeu
     sf::Clock clock;
-    while (window.isOpen() && leftScore < 10 && rightScore < 10) {
+    while (window.isOpen() && leftScore < maxScore && rightScore < maxScore) {
         sf::Time deltaTime = clock.restart();
 
         // Gestion des événements
@@ -257,7 +257,7 @@ int main() {
         // Effacer l'écran
         window.clear(sf::Color::Black);
 
-        dessiner_les_elements(window, leftPaddle, rightPaddle, &ball, scoreText, quitButton, quitButtonText);
+        drawElem(window, leftPaddle, rightPaddle, &ball, scoreText, quitButton, quitButtonText);
 
         // Afficher sur l'écran
         window.display();
