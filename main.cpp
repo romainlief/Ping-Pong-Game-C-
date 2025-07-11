@@ -5,7 +5,7 @@
 #include <thread>
 #include <random>
 
-#include "const.cpp"
+#include "src/const.cpp"
 
 using namespace std;;
 
@@ -136,7 +136,7 @@ int main() {
     int leftScore = 0;
     int rightScore = 0;
     sf::Font font;
-    if (!font.loadFromFile("BungeeTint-Regular.ttf")) {
+    if (!font.loadFromFile("res/BungeeTint-Regular.ttf")) {
         cerr << "Erreur de chargement de la police" << endl;
         return -1;
     }
