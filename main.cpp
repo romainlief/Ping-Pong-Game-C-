@@ -210,19 +210,19 @@ int main() {
         // Déplacement des raquettes
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && leftPaddle.getPosition().y > 0)
             leftPaddle.move(0.f, -paddleSpeed * deltaTime.asSeconds());
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && leftPaddle.getPosition().y + paddleHeight < 800)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && leftPaddle.getPosition().y + paddleHeight < SCREENHEIGHT)
             leftPaddle.move(0.f, paddleSpeed * deltaTime.asSeconds());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && rightPaddle.getPosition().y > 0)
             rightPaddle.move(0.f, -paddleSpeed * deltaTime.asSeconds());
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && rightPaddle.getPosition().y + paddleHeight < 800)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && rightPaddle.getPosition().y + paddleHeight < SCREENHEIGHT)
             rightPaddle.move(0.f, paddleSpeed * deltaTime.asSeconds());
 
         // Mise à jour de la position de la balle
         ball.move(ballVelocity * deltaTime.asSeconds());
 
         // Collision avec les murs (haut/bas)
-        if (ball.getPosition().y <= 0 || ball.getPosition().y + ball.getGlobalBounds().height >= 800) {
+        if (ball.getPosition().y <= 0 || ball.getPosition().y + ball.getGlobalBounds().height >= SCREENHEIGHT) {
             ballVelocity.y = -ballVelocity.y;
         }
 
@@ -238,7 +238,7 @@ int main() {
         if (ball.getPosition().x <= 0) {
             rightScore++;
             resetBall(ball, ballVelocity);
-        } else if (ball.getPosition().x + ball.getGlobalBounds().width >= 1200) {
+        } else if (ball.getPosition().x + ball.getGlobalBounds().width >= SCREENWIDTH) {
             leftScore++;
             resetBall(ball, ballVelocity);
         }
