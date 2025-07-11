@@ -107,11 +107,11 @@ void afficher_compte_a_rebours(sf::RenderWindow &window, sf::Font &font, sf::Spr
 }
 
 int main() {
+    choix_difficulte();
     // Créer une fenêtre SFML
-    sf::RenderWindow window(sf::VideoMode(1250, 900), "Ping Pong Game");
+    sf::RenderWindow window(sf::VideoMode(SCREENWIDTH, SCREENHEIGHT), "Ping Pong Game");
     window.setFramerateLimit(60);
 
-    choix_difficulte();
 
     // Créer des textures simples avec des couleurs différentes pour les paddles
     sf::Texture leftPaddleTexture = createSolidTexture(sf::Color::Green, paddleWidth, paddleHeight);
@@ -125,9 +125,9 @@ int main() {
     sf::Sprite ball(ballTexture);
 
     // Définir les positions initiales des sprites
-    leftPaddle.setPosition(50.f, 350.f);
-    rightPaddle.setPosition(1175.f, 350.f);
-    ball.setPosition(590.f, 390.f);
+    leftPaddle.setPosition(SCREENWIDTH / 11, SCREENHEIGHT / 2 - paddleHeight / 2);
+    rightPaddle.setPosition(SCREENWIDTH / 1.1, SCREENHEIGHT / 2 - paddleHeight / 2);
+    ball.setPosition(SCREENWIDTH / 2, SCREENHEIGHT / 2);
 
     sf::Vector2f ballVelocity(ballSpeed, ballSpeed);
     resetBall(ball, ballVelocity);
@@ -145,7 +145,7 @@ int main() {
     scoreText.setFont(font);
     scoreText.setCharacterSize(24);
     scoreText.setString(to_string(leftScore) + " - " + to_string(rightScore));
-    scoreText.setPosition(570.f, 20.f);
+    scoreText.setPosition(static_cast<float>(SCREENWIDTH) / 2.f - scoreText.getLocalBounds().width / 2.f, SCREENHEIGHT / 20.f - scoreText.getLocalBounds().height / 2.f);
 
     // Créer le bouton Quitter
     sf::RectangleShape quitButton(sf::Vector2f(100.f, 40.f));
@@ -245,6 +245,7 @@ int main() {
 
         // Affichage du score
         scoreText.setString(to_string(leftScore) + " - " + to_string(rightScore));
+        scoreText.setPosition(static_cast<float>(SCREENWIDTH) / 2.f - scoreText.getLocalBounds().width / 2.f, 20.f);
         if (leftScore > rightScore) {
             scoreText.setFillColor(sf::Color::Green);
         } else if (leftScore < rightScore) {
