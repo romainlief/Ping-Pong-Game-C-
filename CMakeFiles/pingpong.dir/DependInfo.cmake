@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/romain/Bureau/Code/Cpp-C_Project/Ping-Pong-Game-C-/main.cpp" "CMakeFiles/pingpong.dir/main.cpp.o" "gcc" "CMakeFiles/pingpong.dir/main.cpp.o.d"
+  "/home/romain/Bureau/Code/Cpp-C_Project/Ping-Pong-Game-C-/src/game.cpp" "CMakeFiles/pingpong.dir/src/game.cpp.o" "gcc" "CMakeFiles/pingpong.dir/src/game.cpp.o.d"
+  "/home/romain/Bureau/Code/Cpp-C_Project/Ping-Pong-Game-C-/src/window.cpp" "CMakeFiles/pingpong.dir/src/window.cpp.o" "gcc" "CMakeFiles/pingpong.dir/src/window.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
