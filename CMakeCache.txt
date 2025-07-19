@@ -227,15 +227,6 @@ pingpong_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 pingpong_SOURCE_DIR:STATIC=/home/romain/Bureau/Code/Cpp-C_Project/Ping-Pong-Game-C-
 
-//Value Computed by CMake
-test2_BINARY_DIR:STATIC=/home/romain/Bureau/Code/Cpp-C_Project/Ping-Pong-Game-C-
-
-//Value Computed by CMake
-test2_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-test2_SOURCE_DIR:STATIC=/home/romain/Bureau/Code/Cpp-C_Project/Ping-Pong-Game-C-
-
 
 ########################
 # INTERNAL cache entries
