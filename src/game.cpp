@@ -8,7 +8,7 @@
 #include <string>
 #include <thread>
 
-Game::Game(float dif) : leftScore(0), rightScore(0), window(), ballSpeed(dif) {
+Game::Game(int dif) : leftScore(0), rightScore(0), window(), ballSpeed(dif) {
   if (!font.loadFromFile("res/BungeeTint-Regular.ttf")) {
     cerr << "Erreur de chargement de la police" << endl;
   }

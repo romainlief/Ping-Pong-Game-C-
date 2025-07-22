@@ -45,7 +45,7 @@ float difChoice() {
 }
 
 int main() {
-    float dif = difChoice();
+    int dif = difChoice();
     Game game(dif);
     game.run();
     return 0;

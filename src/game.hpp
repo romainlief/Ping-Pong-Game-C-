@@ -20,7 +20,7 @@ public:
    * @brief Construct a new Game object
    *
    */
-  Game(float dif);
+  Game(int dif);
 
   // #### Getters and Setters ####
 
