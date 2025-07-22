@@ -105,7 +105,7 @@ private:
 
   sf::Vector2f ballVelocity;
 
-  float dif;
+  int dif;
 };
 
 #endif // GAME_HPP
